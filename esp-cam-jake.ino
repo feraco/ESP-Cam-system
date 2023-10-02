@@ -15,6 +15,43 @@
 #include <esp_camera.h>        // Library for camera functionalities
 #include <FS.h>                // File System library for ESP32
 #include <SD_MMC.h>            // Library for SD card functionalities
+camera_config_t config;
+
+// Frame Size (Resolution)
+config.frame_size = FRAMESIZE_UXGA; // Use UXGA size (1600x1200)
+
+// Pixel Format
+config.pixel_format = PIXFORMAT_JPEG; // Use JPEG format
+
+// JPEG Quality (For JPEG format)
+config.jpeg_quality = 12; // Set to 12 for high quality. Range is 0 to 63.
+
+// Contrast, Brightness, and Saturation
+config.contrast = 0;  // Default is 0. Range could be -2 to +2.
+config.brightness = 0;  // Default is 0. Range could be -2 to +2.
+config.saturation = 0;  // Default is 0. Range could be -2 to +2.
+
+// Special Effects
+config.special_effect = 0;  // 0 means no effect.
+
+// Vertical and Horizontal Flip
+config.vflip = 1;  // Flip vertically
+config.hflip = 1;  // Flip horizontally
+
+// Auto White Balance, Auto Gain Control, Auto Exposure Control
+config.awb = 1;  // Auto white balance
+config.agc = 1;  // Auto gain control
+config.aec = 1;  // Auto exposure control
+
+// Manual White Balance, Gain Control, Exposure Control (When auto modes are off)
+config.awb_gain = 1;  // Set to 1 to enable white balance gain
+config.agc_gain = 1;  // Set to 1 to enable automatic gain
+config.aec_value = 1;  // Set exposure manually when aec is disabled
+
+// ... other code ...
+
+// Now you can initialize the camera with these settings
+esp_err_t err = esp_camera_init(&config);
 
 // Pin definitions for the AI Thinker model camera module
 #define PWDN_GPIO_NUM     32
